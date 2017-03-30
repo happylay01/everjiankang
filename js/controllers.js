@@ -43,39 +43,38 @@ myCtrls.controller('userCtrl', ['$scope',
 ]);
 
 
-// bookListModule.controller('BookListCtrl', function($scope, $http, $state, $stateParams) {
-myCtrls.controller('warehouseCtrl', function($scope, $http) {
+myCtrls.controller('warehouseCtrl', ['$scope', function($scope, $http) {
 	document.title = "智信睿医 - 空间管理";
+
 	$http.get('../json/warehouse.json')
-		.success(function(data) {
+		.then(function(data) {
 			console.log(data);
-			if(data.head.errCode == 0){
+			if (data.head.errCode == 0) {
 				$scope.warehouseData = data.data.wareHouseList;
 			}
-		}
-	);
-});
+		});
 
-myCtrls.controller('addwarehouseCtrl', ['$scope', function($scope){
-	$scope.addWarehouse = function(){
+}]);
+
+
+myCtrls.controller('addwarehouseCtrl', ['$scope', function($scope, $http) {
+	$scope.addWarehouse = function() {
 		console.log($scope.warehouse);
 		if ($scope.addNewWarehouseFrm.$invalid) {
 			console.log("检查数据");
 		} else {
 			console.log("数据正常，表单提交");
 			$http.get('../json/warehouse.json')
-				.success(function(data) {
+				.then(function(data) {
 					console.log(data);
-					if(data.head.errCode == 0){
+					if (data.head.errCode == 0) {
 						$scope.warehouseData = data.data.wareHouseList;
 					}
-				}
-			);
+				});
 
 		}
 	}
 }])
-	
 
 
 
@@ -84,5 +83,3 @@ myCtrls.controller('providerCtrl', ['$scope',
 		document.title = "智信睿医 - provider管理";
 	}
 ]);
-
-
