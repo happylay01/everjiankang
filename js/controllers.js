@@ -43,7 +43,7 @@ myCtrls.controller('userCtrl', ['$scope',
 ]);
 
 
-myCtrls.controller('warehouseCtrl', ['$scope', function($scope, $http) {
+myCtrls.controller('warehouseCtrl', ['$scope', '$http', function($scope, $http) {
 	document.title = "智信睿医 - 空间管理";
 
 	$http.get('../json/warehouse.json')
