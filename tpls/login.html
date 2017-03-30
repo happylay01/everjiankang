@@ -1,0 +1,19 @@
+<div class="container mainLogin">
+	<form name="loginForm" class="form-signin" ng-submit="submitForm()">
+		<h2 class="form-signin-heading">请登录</h2>
+		<label for="inputMobile" class="sr-only">输入手机号</label>
+		<input type="tel" id="inputMobile" class="form-control" placeholder="手机号" required name="mobile" autofocus="" maxlength="11" 
+		ng-model="userData.mobile">
+		<label for="inputPassword" class="sr-only">密码</label>
+		<input type="password" id="inputPassword" class="form-control" placeholder="请输入密码" required ng-model="userData.password" ng-minlength="6" ng-maxlength="18">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="1"> 记住我
+			</label>
+		</div>
+		<!-- <div ng-if="loginForm.username.$valid">
+			用户名正确
+		</div> -->
+		<button class="btn btn-lg btn-primary btn-block" ng-disabled="loginForm.$invalid" type="submit">登 录</button>
+	</form>
+</div>

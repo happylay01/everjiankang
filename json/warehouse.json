@@ -1,0 +1,45 @@
+{
+	"head": {
+		"errCode": "0",
+		"errMsg": "Success"
+	},
+	"data": {
+		"wareHouseList": [{
+			"id": "001",
+			"name": "LL01",
+			"flour": "诊疗室一",
+			"roomName": "虞姬",
+			"state": "空闲"
+		}, {
+			"id": "002",
+			"name": "LL02",
+			"flour": "诊疗室一",
+			"roomName": "虞姬",
+			"state": "空闲"
+		}, {
+			"id": "003",
+			"name": "LL03",
+			"flour": "诊疗室一",
+			"roomName": "虞姬",
+			"state": "空闲"
+		}, {
+			"id": "004",
+			"name": "LL04",
+			"flour": "诊疗室一",
+			"roomName": "虞姬",
+			"state": "空闲"
+		}, {
+			"id": "005",
+			"name": "LL05",
+			"flour": "诊疗室一",
+			"roomName": "虞姬",
+			"state": "空闲"
+		}, {
+			"id": "006",
+			"name": "LL06",
+			"flour": "诊疗室一",
+			"roomName": "虞姬",
+			"state": "空闲"
+		}]
+	}
+}
