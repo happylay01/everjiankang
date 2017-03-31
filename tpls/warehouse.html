@@ -1,73 +1,68 @@
 <ng-include src="'tpls/topNav/topNav.html'" onload="" autoscroll=""></ng-include>
-  
 <!-- 内容主体 s -->
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar pull-left">
-      <ng-include src="'tpls/leftNav/leftNav.html'" onload="" autoscroll=""></ng-include>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-<!--       <h1 class="page-header">空间管理</h1>
- -->
-      <h2 class="sub-header">
-      	<div class="pull-right">
-      	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gridSystemModal">新增</button>
-      	</div>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar pull-left">
+            <ng-include src="'tpls/leftNav/leftNav.html'" onload="" autoscroll=""></ng-include>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h2 class="sub-header">
+        <span class="pull-right">
+          <button type="button" class="btn btn-primary" data-animation="am-fade-and-scale" data-template-url="tpls/warehouse/addwarehouse.html" data-placement="center" bs-modal="modal" data-container="body">新增</button>
+          <button type="button" class="btn btn-primary" data-animation="am-fade-and-scale" data-placement="center" ng-click="openAddHouseware()">新增1</button>
+        </span>
       空间管理</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>编号</th>
-              <th>名称</th>
-			  <th>楼层</th>
-              <th>房间名</th>
-              <th>状态</th>
-              <th width="200">操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="warehouse in warehouseData">
-              <td>{{warehouse.id}}</td>
-              <td>{{warehouse.name}}</td>
-              <td>{{warehouse.flour}}</td>
-              <td>{{warehouse.roomName}}</td>
-              <td>{{warehouse.state}}</td>
-              <td><button class="btn btn-primary">编辑</button><button class="btn btn-warning">删除</button></td>
-            </tr>
-            
-          </tbody>
-        </table>
-      </div>
-	
-	<!-- 翻页 S -->
-	<div class="pull-right">
-		<nav aria-label="Page navigation">
-		  <ul class="pagination">
-		    <li>
-		      <a href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
-		    <li>
-		      <a href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
-	</div>
-	<!-- 翻页 E -->
-
+            <!-- <div ever-table-list people1="warehouseData"></div> -->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>名称</th>
+                            <th>楼层</th>
+                            <th>房间名</th>
+                            <th>状态</th>
+                            <th width="200">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="warehouse in warehouseData">
+                            <td>{{warehouse.id}}</td>
+                            <td>{{warehouse.name}}</td>
+                            <td>{{warehouse.flour}}</td>
+                            <td>{{warehouse.roomName}}</td>
+                            <td>{{warehouse.state}}</td>
+                            <td>
+                                <button class="btn btn-primary">编辑</button>
+                                <button class="btn btn-warning">删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 翻页 S -->
+            <div class="pull-right">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- 翻页 E -->
+        </div>
     </div>
-  </div>
 </div>
-<!-- 内容主体 e -->
-
-<ng-include src="'tpls/warehouse/addwarehouse.html'" onload="" autoscroll=""></ng-include>
-

@@ -17,9 +17,14 @@
       	<li class="active"><a href="#">空间管理</a></li>
         <li><a href="#">客户管理 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">预约管理</a></li>
-        <li class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">医技管理 <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+        <!-- Inlined sibling dropdown -->
+
+
+        <li class="active">
+          <a href="javascript:;" bs-dropdown aria-haspopup="true" aria-expanded="false" bs-dropdown aria-haspopup="true" aria-expanded="false">
+            医技管理
+          </a>
+          <ul class="dropdown-menu" role="menu">
             <li><a href="#">医生</a></li>
             <li><a href="#">护士</a></li>
             <li><a href="#">技工</a></li>
@@ -40,11 +45,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Link</a></li>
         <li class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息 <span class="caret"></span></a>
+          <a href="javascript:;" class="dropdown-toggle" bs-dropdown aria-haspopup="true" aria-expanded="false" aria-expanded="false">个人信息 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">我的信息</a></li>
             <li><a href="#">我的订单</a></li>
-            <li><a href="#">医技管理</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">退出</a></li>
           </ul>

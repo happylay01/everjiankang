@@ -1,5 +1,5 @@
 var everApp = angular.module("everApp", [
-	'ngRoute', 'everAppCtrls','everAppDirectives'
+	'ngRoute', 'everAppCtrls','everAppDirectives','mgcrea.ngStrap'
 ]);
 
 everApp.config(function($routeProvider) {

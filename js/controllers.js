@@ -1,6 +1,7 @@
-var myCtrls = angular.module('everAppCtrls', []);
+	
+var warehouse = angular.module('everAppCtrls', ['mgcrea.ngStrap','mgcrea.ngStrap.tooltip']);
 
-myCtrls.controller("loginCtrl", ['$scope',
+warehouse.controller("loginCtrl", ['$scope',
 	function($scope) {
 		document.title = "智信睿医 - 登录";
 		$scope.userData = {
@@ -19,14 +20,14 @@ myCtrls.controller("loginCtrl", ['$scope',
 ]);
 
 
-myCtrls.controller('registerCtrl', ['$scope',
+warehouse.controller('registerCtrl', ['$scope',
 	function($scope) {
 		document.title = "智信睿医 - 注册";
 	}
 ]);
 
 
-myCtrls.controller('userCtrl', ['$scope',
+warehouse.controller('userCtrl', ['$scope',
 	function($scope) {
 		document.title = "智信睿医 - 个人信息";
 		$scope.books = [{
@@ -43,42 +44,70 @@ myCtrls.controller('userCtrl', ['$scope',
 ]);
 
 
-myCtrls.controller('warehouseCtrl', ['$scope', function($scope, $http) {
+warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($scope, $http,$modal) {
 	document.title = "智信睿医 - 空间管理";
 
-	$http.get('../json/warehouse.json')
-		.then(function(data) {
-			console.log(data);
-			if (data.head.errCode == 0) {
-				$scope.warehouseData = data.data.wareHouseList;
+	// list 
+	$scope.showHousewareList = function(){
+		$http.get('../json/warehouse.json')
+		.then(function(result) {
+			console.log(result);
+			if (result.data.head.errCode == 0) {
+				$scope.warehouseData = result.data.data.wareHouseList;
 			}
 		});
+	}
 
-}]);
+	// show add houseware modal
+	$scope.openAddHouseware = function(){
+		$scope.titleName = "XXXX";
+		// Pre-fetch an external template populated with a custom scope
+		$scope.myOtherModal = $modal({
+			title: '空间管理111111',
+			scope: $scope,
+			template: 'tpls/warehouse/addWarehouse.html',
+			show: true
+		});
 
+		$scope.warehouse = {
+			name:"郑世翼",
+			flour:"一层",
+			code:"LL10"
+		}
+	}
 
-myCtrls.controller('addwarehouseCtrl', ['$scope', function($scope, $http) {
+	$scope.showHousewareList();
+
+	// add warehouse post data
 	$scope.addWarehouse = function() {
-		console.log($scope.warehouse);
+
 		if ($scope.addNewWarehouseFrm.$invalid) {
 			console.log("检查数据");
 		} else {
-			console.log("数据正常，表单提交");
-			$http.get('../json/warehouse.json')
-				.then(function(data) {
-					console.log(data);
-					if (data.head.errCode == 0) {
-						$scope.warehouseData = data.data.wareHouseList;
+			$http.get('../json/addwarehouse.json')
+				.then(function(result) {
+					if (result.data.head.errCode == 0) {
+						
+						$scope.myOtherModal.hide();
+						$scope.showHousewareList();
+
+						console.log("数据正常，表单提交");
+
 					}
 				});
 
 		}
 	}
-}])
+
+
+	// 弹出导航
+	
+
+}]);
 
 
 
-myCtrls.controller('providerCtrl', ['$scope',
+warehouse.controller('providerCtrl', ['$scope',
 	function($scope) {
 		document.title = "智信睿医 - provider管理";
 	}

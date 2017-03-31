@@ -8,6 +8,19 @@ myDirectives.directive("hello", function() {
 	}
 })
 
+
+myDirectives.directive("everTableList", function() {
+	return {
+		restrict: "AECM",
+		scope:{
+			peoples: '=people1'
+		},
+		templateUrl: "tpls/table.html",
+		replace: true
+	}
+})
+
+
 // myDirectives.directive("onewarehouse", function() {
 // 	var obj = {
 // 		restrict: "EA",
