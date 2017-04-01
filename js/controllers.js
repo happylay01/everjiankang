@@ -60,7 +60,7 @@ myCtrls.controller('warehouseCtrl', ['$scope', '$http', function($scope, $http) 
 myCtrls.controller('addwarehouseCtrl', ['$scope', function($scope, $http) {
 	$scope.addWarehouse = function() {
 		console.log($scope.warehouse);
-		if ($scope.addNewWarehouseFrm.$invalid) {
+		if ($scope.test.addNewWarehouseFrm.$invalid) {
 			console.log("检查数据");
 		} else {
 			console.log("数据正常，表单提交");
