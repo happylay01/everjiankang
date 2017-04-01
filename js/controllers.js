@@ -1,5 +1,6 @@
-	
-var warehouse = angular.module('everAppCtrls', ['mgcrea.ngStrap','mgcrea.ngStrap.tooltip']);
+var warehouse = angular.module('everAppCtrls', [
+	'mgcrea.ngStrap', 'mgcrea.ngStrap.tooltip', 'ngGrid'
+]);
 
 warehouse.controller("loginCtrl", ['$scope',
 	function($scope) {
@@ -44,39 +45,40 @@ warehouse.controller('userCtrl', ['$scope',
 ]);
 
 
-warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($scope, $http,$modal) {
+warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 	document.title = "智信睿医 - 空间管理";
 
 	// list 
-	$scope.showHousewareList = function(){
+	$scope.showHousewareList = function() {
 		$http.get('../json/warehouse.json')
-		.then(function(result) {
-			console.log(result);
-			if (result.data.head.errCode == 0) {
-				$scope.warehouseData = result.data.data.wareHouseList;
-			}
-		});
+			.then(function(result) {
+				console.log(result);
+				if (result.data.head.errCode == 0) {
+					$scope.warehouseData = result.data.data.wareHouseList;
+				}
+			});
 	}
 
+	$scope.showHousewareList();
+
+
 	// show add houseware modal
-	$scope.openAddHouseware = function(){
-		$scope.titleName = "XXXX";
+	$scope.openAddHouseware = function() {
+		$scope.titleName = "空间管理";
 		// Pre-fetch an external template populated with a custom scope
 		$scope.myOtherModal = $modal({
-			title: '空间管理111111',
+			title: '空间管理',
 			scope: $scope,
-			template: 'tpls/warehouse/addWarehouse.html',
+			templateUrl: 'tpls/warehouse/addWarehouse.html',
 			show: true
 		});
 
 		$scope.warehouse = {
-			name:"郑世翼",
-			flour:"一层",
-			code:"LL10"
+			name: "郑世翼",
+			flour: "一层",
+			code: "LL10"
 		}
 	}
-
-	$scope.showHousewareList();
 
 	// add warehouse post data
 	$scope.addWarehouse = function() {
@@ -87,7 +89,7 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 			$http.get('../json/addwarehouse.json')
 				.then(function(result) {
 					if (result.data.head.errCode == 0) {
-						
+
 						$scope.myOtherModal.hide();
 						$scope.showHousewareList();
 
@@ -99,13 +101,118 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 		}
 	}
 
-
-	// 弹出导航
-	
+	// 弹出导航 采用内联方式，暂时不在这里初始化
 
 }]);
 
 
+
+warehouse.controller('DisplayWarehouseListCtrl', function($scope, $http) {
+
+	$scope.filterOptions = {
+		filterText: "",
+		useExternalFilter: true
+	};
+	$scope.totalServerItems = 0;
+	$scope.pagingOptions = {
+		pageSizes: [5, 10, 20],
+		pageSize: 20,
+		currentPage: 1
+	};
+
+	$scope.setPagingData = function(data, page, pageSize) {
+
+		$scope.warehouseData = data.data.data.wareHouseList;
+		$scope.totalServerItems = $scope.warehouseData.length;
+		if (!$scope.$$phase) {
+			$scope.$apply();
+		}
+	};
+
+	$scope.getPagedDataAsync = function(pageSize, page, searchText) {
+
+		setTimeout(function() {
+			var data;
+
+			if (searchText) {
+				var ft = searchText.toLowerCase();
+				$http.get('../json/warehouse.json').then(function(largeLoad) {
+					data = largeLoad.filter(function(item) {
+						return JSON.stringify(item).toLowerCase().indexOf(ft) != -1;
+					});
+					$scope.setPagingData(data, page, pageSize);
+				});
+			} else {
+				$http.get('../json/warehouse.json').then(function(largeLoad) {
+					$scope.setPagingData(largeLoad, page, pageSize);
+				});
+			}
+		}, 100);
+	};
+
+	$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+
+	$scope.$watch('pagingOptions', function(newVal, oldVal) {
+		if (newVal !== oldVal && newVal.currentPage !== oldVal.currentPage) {
+			$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+		}
+	}, true);
+	$scope.$watch('filterOptions', function(newVal, oldVal) {
+		if (newVal !== oldVal) {
+			$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
+		}
+	}, true);
+
+	$scope.gridOptions = {
+
+		data: 'warehouseData',
+		multiSelect: false,
+		enableCellSelection: true,
+		enableRowSelection: false,
+		enableCellEdit: true,
+		enablePinning: true,
+		columnDefs: [{
+			field: 'id',
+			displayName: 'id',
+			width: 60,
+			pinnable: false,
+			sortable: false
+		}, {
+			field: 'name',
+			displayName: '诊室名',
+			enableCellEdit: true
+		}, {
+			field: 'flour',
+			displayName: '楼层',
+			enableCellEdit: true,
+			width: 220
+		}, {
+			field: 'roomName',
+			displayName: '诊室名',
+			enableCellEdit: true,
+			width: 120
+		}, {
+			field: 'state',
+			displayName: '状态',
+			enableCellEdit: true,
+			width: 120
+				// cellFilter: 'currency:"￥"'
+		}, {
+			field: 'id',
+			displayName: '操作',
+			enableCellEdit: false,
+			sortable: false,
+			pinnable: false,
+			cellTemplate: '<div><a ui-sref="bookdetail({bookId:row.getProperty(col.field)})" id="{{row.getProperty(col.field)}}">详情</a></div>'
+		}],
+		enablePaging: true,
+		showFooter: true,
+		totalServerItems: 'totalServerItems',
+		pagingOptions: $scope.pagingOptions,
+		filterOptions: $scope.filterOptions
+
+	};
+});
 
 warehouse.controller('providerCtrl', ['$scope',
 	function($scope) {

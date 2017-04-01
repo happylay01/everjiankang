@@ -1,17 +1,16 @@
-<ng-include src="'tpls/topNav/topNav.html'" onload="" autoscroll=""></ng-include>
+<div ui-view="topNav"></div>
 <!-- 内容主体 s -->
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="warehouseCtrl">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar pull-left">
-            <ng-include src="'tpls/leftNav/leftNav.html'" onload="" autoscroll=""></ng-include>
+            <div ui-view="leftNav"></div>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">
-        <span class="pull-right">
-          <button type="button" class="btn btn-primary" data-animation="am-fade-and-scale" data-template-url="tpls/warehouse/addwarehouse.html" data-placement="center" bs-modal="modal" data-container="body">新增</button>
-          <button type="button" class="btn btn-primary" data-animation="am-fade-and-scale" data-placement="center" ng-click="openAddHouseware()">新增1</button>
-        </span>
-      空间管理</h2>
+	        <span class="pull-right">
+	          <!-- <button type="button" class="btn btn-primary" data-animation="am-fade-and-scale" data-template-url="tpls/warehouse/addwarehouse.html" data-placement="center" bs-modal="modal" data-container="body">新增</button> -->
+	          <button type="button" class="btn btn-primary" data-animation="am-fade-and-scale" data-placement="center" ng-click="openAddHouseware()">新增</button>
+	        </span>空间管理</h2>
             <!-- <div ever-table-list people1="warehouseData"></div> -->
             <div class="table-responsive">
                 <table class="table table-striped">
