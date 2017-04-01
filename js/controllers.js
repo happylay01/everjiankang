@@ -65,6 +65,12 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 	// show add houseware modal
 	$scope.openAddHouseware = function() {
 		$scope.titleName = "空间管理";
+		$scope.warehouse = {
+			name: "郑世翼",
+			flour: "一层",
+			code: "LL10"
+		}
+
 		// Pre-fetch an external template populated with a custom scope
 		$scope.myOtherModal = $modal({
 			title: '空间管理',
@@ -73,17 +79,14 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 			show: true
 		});
 
-		$scope.warehouse = {
-			name: "郑世翼",
-			flour: "一层",
-			code: "LL10"
-		}
+
 	}
 
 	// add warehouse post data
 	$scope.addWarehouse = function() {
 
-		if ($scope.addNewWarehouseFrm.$invalid) {
+		debugger
+		if ($scope.test.addNewWarehouseFrm.$invalid) {
 			console.log("检查数据");
 		} else {
 			$http.get('../json/addwarehouse.json')
@@ -103,8 +106,59 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 
 	// 弹出导航 采用内联方式，暂时不在这里初始化
 
-}]);
+	// 弹出修改内容弹窗
+	$scope.popUpdateWarehouse = function(warehouseId) {
+		$scope.titleName = "空间管理";
+		$scope.warehouse = {
+			name: "郑世翼",
+			flour: "一层",
+			code: "LL10",
+			id: warehouseId
+		}
 
+		// Pre-fetch an external template populated with a custom scope
+		$scope.myOtherModal = $modal({
+			title: '空间管理',
+			scope: $scope,
+			templateUrl: 'tpls/warehouse/addWarehouse.html',
+			show: true
+		});
+
+	}
+
+	// 弹出删除弹窗
+	$scope.popDelWarehouse = function() {
+		$scope.titleName = "空间管理";
+		$scope.titleCnt = "确定要删除该条数据吗？";
+
+		// Pre-fetch an external template populated with a custom scope
+		$scope.myOtherModal = $modal({
+			title: '诊室管理',
+			scope: $scope,
+			templateUrl: 'tpls/warehouse/delWarehouse.html',
+			show: true
+		});
+	}
+
+
+	// 弹出删除弹窗
+	$scope.delWarehouse = function() {
+		debugger
+		$http.get('../json/delwarehouse.json')
+			.then(function(result) {
+				if (result.data.head.errCode == 0) {
+
+					$scope.myOtherModal.hide();
+					$scope.showHousewareList();
+
+					console.log("数据正常，表单提交");
+
+				}
+			});
+
+	}
+
+}]);
 
 
 warehouse.controller('DisplayWarehouseListCtrl', function($scope, $http) {

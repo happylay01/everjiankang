@@ -1,0 +1,20 @@
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" name="delNewWarehouseFrm" ng-submit="delWarehouse()">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close" ng-click="$hide()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" ng-bind="titleName"></h4>
+                </div>
+                <div class="modal-body">
+                    <p ng-bind="titleCnt"></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" ng-modal="{{warehouse.id}}">
+                    <button type="button" class="btn btn-default" ng-click="$hide()">取消</button>
+                    <button type="submit" class="btn btn-primary">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

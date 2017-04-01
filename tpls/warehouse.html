@@ -32,8 +32,8 @@
                             <td>{{warehouse.roomName}}</td>
                             <td>{{warehouse.state}}</td>
                             <td>
-                                <button class="btn btn-primary">编辑</button>
-                                <button class="btn btn-warning">删除</button>
+                                <button class="btn btn-primary" ng-click="popUpdateWarehouse('{{warehouse.id}}')">编辑</button>
+                                <button class="btn btn-warning" ng-click="popDelWarehouse('{{warehouse.id}}')">删除</button>
                             </td>
                         </tr>
                     </tbody>
