@@ -4,7 +4,9 @@ var brandctrl = angular.module('brandCtrls', [
 
 brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 	document.title = "智信睿医 - 品牌管理";
-	console.log($scope);
+
+	$scope.listPage = {};
+
 	// 品牌列表 
 	$scope.showBrandList = function() {
 		$http.get(_BASEURL + '/warehouse/brand/getBrandList/')
@@ -34,17 +36,14 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 		});
 	}
 
-	console.log($scope);
-	console.log($scope.addBrandFrm);
 
 	// add brand post data
 	$scope.addBrand = function() {
-		
-		// console.log($scope.test.addBrandFrm)
-		if ($scope.addBrandFrm.$invalid) {
+
+		if ($scope.listPage.addBrandFrm.$invalid) {
 			console.log("检查数据");
 		} else {
-			$http.get(_BASEURL + 'warehouse/brand/createBrand/')
+			$http.post(_BASEURL + 'warehouse/brand/createBrand/')
 				.then(function(result) {
 					if (result.data.head.errCode == 0) {
 
@@ -58,8 +57,6 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 
 		}
 	}
-
-	// 弹出导航 采用内联方式，暂时不在这里初始化
 
 	// 弹出修改内容弹窗
 	$scope.popUpdateBrand = function(brandObj) {
