@@ -47,8 +47,8 @@ warehouse.controller('userCtrl', ['$scope',
 
 warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 	document.title = "智信睿医 - 空间管理";
-
-	// list 
+	$scope.test = {};
+	// list
 	$scope.showHousewareList = function() {
 		$http.get('../json/warehouse.json')
 			.then(function(result) {
@@ -61,9 +61,9 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 
 	$scope.showHousewareList();
 
+
 	// show add houseware modal
 	$scope.openAddHouseware = function() {
-		$scope.titleName = "空间管理";
 		$scope.warehouse = {
 			name: "郑世翼",
 			flour: "一层",
@@ -77,6 +77,7 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 			templateUrl: 'tpls/warehouse/addWarehouse.html',
 			show: true
 		});
+
 	}
 
 	// add warehouse post data
@@ -122,21 +123,6 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 
 	}
 
-	// 弹出删除弹窗
-	$scope.popDelWarehouse = function() {
-		$scope.titleName = "空间管理";
-		$scope.titleCnt = "确定要删除该条数据吗？";
-
-		// Pre-fetch an external template populated with a custom scope
-		$scope.myOtherModal = $modal({
-			title: '诊室管理',
-			scope: $scope,
-			templateUrl: 'tpls/warehouse/delWarehouse.html',
-			show: true
-		});
-	}
-
-
 	// 删除数据提交
 	$scope.delWarehouse = function() {
 
@@ -155,6 +141,7 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 	}
 
 }]);
+
 
 
 warehouse.controller('DisplayWarehouseListCtrl', function($scope, $http) {
@@ -263,10 +250,4 @@ warehouse.controller('DisplayWarehouseListCtrl', function($scope, $http) {
 
 	};
 });
-
-warehouse.controller('providerCtrl', ['$scope',
-	function($scope) {
-		document.title = "智信睿医 - provider管理";
-	}
-]);
 
