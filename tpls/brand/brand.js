@@ -7,7 +7,7 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 
 	$scope.listPage = {};
 
-	// 品牌列表 
+	// 品牌列表
 	$scope.showBrandList = function() {
 		$http.get(_BASEURL + '/warehouse/brand/getBrandList/')
 			.then(function(result) {
@@ -27,7 +27,6 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 			intro: "老牌中医症所"
 		}
 
-		// Pre-fetch an external template populated with a custom scope
 		$scope.myOtherModal = $modal({
 			title: '品牌管理',
 			scope: $scope,
@@ -35,7 +34,6 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 			show: true
 		});
 	}
-
 
 	// add brand post data
 	$scope.addBrand = function() {
@@ -67,7 +65,6 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 			id: brandObj.id
 		}
 
-		// Pre-fetch an external template populated with a custom scope
 		$scope.myOtherModal = $modal({
 			title: '品牌管理',
 			scope: $scope,
@@ -80,7 +77,6 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 	$scope.popDelBrand = function() {
 		$scope.titleCnt = "确定要删除该条数据吗？";
 
-		// Pre-fetch an external template populated with a custom scope
 		$scope.myOtherModal = $modal({
 			title: '品牌管理',
 			scope: $scope,
@@ -88,7 +84,6 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 			show: true
 		});
 	}
-
 
 	// 删除数据提交
 	$scope.delBrand = function() {
@@ -103,18 +98,11 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 				$scope.showBrandList();
 
 				console.log("数据正常，表单提交");
-
 			}
-			// this callback will be called asynchronously
-			// when the response is available
 		})
 		.error(function(data, status, headers, config) {
 			console.log("提交失败，请重试");
-			// called asynchronously if an error occurs
-			// or server returns response with an error status.
 		});
-
-
 	}
 
 }]);
