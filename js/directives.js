@@ -3,10 +3,11 @@ var myDirectives = angular.module('everAppDirectives', []);
 myDirectives.directive("hello", function() {
 	return {
 		restrict: "AECM",
-		templateUrl: "tpls/topNav/topNav.html",
+		templateUrl: "tpls/hello.html",
 		replace: true
 	}
 })
+
 
 
 myDirectives.directive("everTableList", function() {
@@ -20,6 +21,14 @@ myDirectives.directive("everTableList", function() {
 	}
 })
 
+
+myDirectives.directive("everPager", function() {
+	return {
+		restrict: "AECM",
+		templateUrl: "tpls/pager.html",
+		replace: true
+	}
+})
 
 // myDirectives.directive("onewarehouse", function() {
 // 	var obj = {

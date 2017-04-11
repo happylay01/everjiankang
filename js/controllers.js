@@ -61,7 +61,6 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 
 	$scope.showHousewareList();
 
-
 	// show add houseware modal
 	$scope.openAddHouseware = function() {
 		$scope.titleName = "空间管理";
@@ -78,14 +77,11 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 			templateUrl: 'tpls/warehouse/addWarehouse.html',
 			show: true
 		});
-
-
 	}
 
 	// add warehouse post data
 	$scope.addWarehouse = function() {
 
-		debugger
 		if ($scope.test.addNewWarehouseFrm.$invalid) {
 			console.log("检查数据");
 		} else {
@@ -141,9 +137,9 @@ warehouse.controller('warehouseCtrl', ['$scope', '$http', '$modal', function($sc
 	}
 
 
-	// 弹出删除弹窗
+	// 删除数据提交
 	$scope.delWarehouse = function() {
-		debugger
+
 		$http.get('../json/delwarehouse.json')
 			.then(function(result) {
 				if (result.data.head.errCode == 0) {
@@ -273,3 +269,4 @@ warehouse.controller('providerCtrl', ['$scope',
 		document.title = "智信睿医 - provider管理";
 	}
 ]);
+

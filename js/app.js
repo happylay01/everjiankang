@@ -1,5 +1,9 @@
+window._BASEURL = "http://api.everjiankang.com/";
+
 var everApp = angular.module("everApp", [
-	'ui.router', 'everAppCtrls', 'mgcrea.ngStrap'
+	'ui.router', 'ui.tree', 'mgcrea.ngStrap', 
+	'everAppCtrls', 'everAppDirectives',
+	'brandCtrls'
 	//'everAppCtrls', 'everAppDirectives', 'mgcrea.ngStrap'
 ]);
 
@@ -9,7 +13,7 @@ everApp.run(function($rootScope, $state, $stateParams) {
 });
 
 everApp.config(function($stateProvider, $urlRouterProvider) {
-	// $urlRouterProvider.otherwise('/index');
+	$urlRouterProvider.otherwise('/index');
 	$stateProvider
 		.state('index', {
 			url: '/index',
@@ -19,13 +23,17 @@ everApp.config(function($stateProvider, $urlRouterProvider) {
 			url: '/reg',
 			templateUrl: 'tpls/register.html'
 		})
-		.state('/user', {
+		.state('user', {
 			url: '/user',
 			templateUrl: 'tpls/user.html'
 		})
-		.state('/provider', {
+		.state('provider', {
 			url: '/provider',
 			templateUrl: 'tpls/provider.html'
+		})
+		.state('treetest', {
+			url: '/treetest',
+			templateUrl: 'tpls/treetest.html'
 		})
 		.state('warehouse', {
 			url: '/warehouse',
@@ -41,5 +49,21 @@ everApp.config(function($stateProvider, $urlRouterProvider) {
 				}
 			}
 		})
+		.state('brand', {
+			url: '/brand',
+			views: {
+				'': {
+					templateUrl: 'tpls/brand/brand.html'
+				},
+				'topNav@brand': {
+					templateUrl: 'tpls/topNav/topNav.html'
+				},
+				'leftNav@brand': {
+					templateUrl: 'tpls/leftNav/leftNav.html'
+				}
+			}
+		})
 });
+
+
 
