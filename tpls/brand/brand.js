@@ -5,7 +5,8 @@ var brandctrl = angular.module('brandCtrls', [
 brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 	document.title = "智信睿医 - 品牌管理";
 	console.log($scope);
-	// 品牌列表 
+	$scope.listPage = {};
+	// 品牌列表
 	$scope.showBrandList = function() {
 		$http.get(_BASEURL + '/warehouse/brand/getBrandList/')
 			.then(function(result) {
@@ -35,13 +36,13 @@ brandctrl.controller('brandCtrl', ['$scope', '$http', '$modal', function($scope,
 	}
 
 	console.log($scope);
-	console.log($scope.addBrandFrm);
+	console.log($scope.listPage.addBrandFrm);
 
 	// add brand post data
 	$scope.addBrand = function() {
-		
+
 		// console.log($scope.test.addBrandFrm)
-		if ($scope.addBrandFrm.$invalid) {
+		if ($scope.listPage.addBrandFrm.$invalid) {
 			console.log("检查数据");
 		} else {
 			$http.get(_BASEURL + 'warehouse/brand/createBrand/')
